@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +27,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/hello', function () {
         return view('home');
     });
+    Route::get('test',[TestController::class,'index'])->name('test.index');
 });
 
