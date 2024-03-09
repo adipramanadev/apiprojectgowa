@@ -1,7 +1,7 @@
 @extends('admin.master')
 
 @section('title')
-    <title>Category</title>
+    <title>Tambah Kategori</title>
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Halaman Kategori</h3>
+                            <h3>Tambah Kategori</h3>
                         </div>
                     </div>
                 </div>
@@ -20,27 +20,23 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Data Kategori</h4>
-                            <div class="card-header-action">
-                                <a href="{{ route('category.create') }}" class="btn btn-outline-primary">Tambah Kategori</a>
-                            </div>
+                            <h4>Form Tambah Kategori</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-md">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Nama Kategori</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                </table>
+                                <div class="form-group">
+                                    <label for="namacategory">Nama Kategori</label>
+                                    <input type="text" name="name" class="form-control" id="namacategory" placeholder="Masukkan Nama Kategori.." >
+                                </div>
+                                <div class="form-group text-right">
+                                    <button type="submit" class="btn btn-outline-primary">Simpan</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+    </div>
+    </section>
     </div>
 @endsection

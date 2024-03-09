@@ -28,5 +28,6 @@ Route::prefix('admin')->group(function () {
         return view('home');
     });
     Route::get('category', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('category/create', [CategoryController::class, 'create'])->name('category.create');
 });
 
