@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +27,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/hello', function () {
         return view('home');
     });
-    Route::get('test',[TestController::class,'index'])->name('test.index');
+    Route::get('category', [CategoryController::class, 'index'])->name('category.index');
 });
 
