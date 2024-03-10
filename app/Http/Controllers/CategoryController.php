@@ -77,7 +77,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        //validate 
+        $request->validate([
+            'name' => 'required|unique:categories'
+        ]);
+        $input = $request->all();
+        $category = Category::find($category->id);
+        //alert message
+        if ($category->update($input)) {
+            Alert::success('Category updated successfully');
+            return redirect()->route('category.index');
+        } else {
+            return redirect()->route('category.index')->with('error', 'Category failed'. $request->name  .'to update');
+        }
     }
 
     /**

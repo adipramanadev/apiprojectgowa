@@ -19,12 +19,22 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
+                        {{-- pesan error --}}
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="card-header">
                             <h4>Form Edit Kategori</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form action="#" method="post">
+                                <form action="{{ route('category.update', $category->id) }}" method="post">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
