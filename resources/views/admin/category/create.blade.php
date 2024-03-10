@@ -10,6 +10,16 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
+
+                        <div class="card-header">
+                            <h3>Tambah Kategori</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
                         {{-- pesan error  --}}
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -21,20 +31,11 @@
                             </div>
                         @endif
                         <div class="card-header">
-                            <h3>Tambah Kategori</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
                             <h4>Form Tambah Kategori</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form action="" method="post">
+                                <form action="{{ route('category.store') }}" method="post">
                                     @csrf
                                     @method('POST')
                                     <div class="form-group">

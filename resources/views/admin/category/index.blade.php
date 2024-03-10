@@ -4,6 +4,10 @@
     <title>Category</title>
 @endsection
 
+@section('script')
+    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
+@endsection
+
 @section('content')
     <div class="main-content">
         <section class="section">
@@ -19,6 +23,18 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
+                        {{-- message success --}}
+                        {{-- @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif --}}
+                        {{-- swal success --}}
+                        @if (Session::has('success'))
+                            <script>
+                                Swal.fire("Success", "{{ Session::get('success') }}", "success");
+                            </script>
+                        @endif
                         <div class="card-header">
                             <h4>Data Kategori</h4>
                             <div class="card-header-action">
@@ -35,6 +51,29 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        @forelse ($categories as $category)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $category->name }}</td>
+                                                <td>
+                                                    <form action="{{ route('category.destroy', $category->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="#" class="btn btn-outline-warning">Edit</a>
+                                                        <button class="btn btn-outline-danger"
+                                                            onclick="return confirmDelete(event);"
+                                                            data-confirm-delete="true">Hapus</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="3" class="text-center">Tidak ada data</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -43,4 +82,28 @@
             </div>
         </section>
     </div>
+@endsection
+
+@section('script-bottom')
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault();
+            var form = event.target.parentElement;
+            var url = form.action;
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        }
+    </script>
 @endsection
