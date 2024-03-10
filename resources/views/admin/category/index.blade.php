@@ -23,12 +23,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        {{-- message success --}}
-                        {{-- @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif --}}
+
                         {{-- swal success --}}
                         @if (Session::has('success'))
                             <script>
@@ -61,7 +56,8 @@
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <a href="#" class="btn btn-outline-warning">Edit</a>
+                                                        <a href="{{ route('category.edit', $category->id) }}"
+                                                            class="btn btn-outline-warning">Edit</a>
                                                         <button class="btn btn-outline-danger"
                                                             onclick="return confirmDelete(event);"
                                                             data-confirm-delete="true">Hapus</button>
@@ -83,7 +79,6 @@
         </section>
     </div>
 @endsection
-
 @section('script-bottom')
     <script>
         function confirmDelete(event) {
@@ -92,7 +87,7 @@
             var url = form.action;
 
             Swal.fire({
-                title: 'Are you sure?',
+                title: 'Anda Yakin Delete Data Ini?',
                 text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,

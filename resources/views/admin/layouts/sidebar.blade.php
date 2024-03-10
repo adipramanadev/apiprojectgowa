@@ -17,11 +17,11 @@
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Data User</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="">Data User</a></li>
+                    <li><a class="nav-link" href="{{ route('category.index') }}">Data User</a></li>
                     <li><a class="nav-link" href="">Atur Role</a></li>
                 </ul>
             </li>
-            
+
 
             <li class="menu-header">Data Master</li>
             <li class="dropdown">
@@ -34,7 +34,7 @@
             </li>
             <li class="menu-header">Pages</li>
             <li class=active><a class="nav-link" href="blank.html"><i class="far fa-square"></i>
-                <span>Blank Page</span></a></li>
+                    <span>Blank Page</span></a></li>
         </ul>
 
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
