@@ -1,21 +1,17 @@
 @extends('admin.master')
 
 @section('title')
-    <title>Category</title>
-@endsection
-
-@section('script')
-    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
+    <title>Role User</title>
 @endsection
 
 @section('content')
     <div class="main-content">
         <section class="section">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Halaman Kategori</h3>
+                            <h3>Role User</h3>
                         </div>
                     </div>
                 </div>
@@ -23,7 +19,6 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-
                         {{-- swal success --}}
                         @if (Session::has('success'))
                             <script>
@@ -31,9 +26,9 @@
                             </script>
                         @endif
                         <div class="card-header">
-                            <h4>Data Kategori</h4>
+                            <h4>Pengaturan Role</h4>
                             <div class="card-header-action">
-                                <a href="{{ route('category.create') }}" class="btn btn-outline-primary">Tambah Kategori</a>
+                                <a href="{{ route('role.create') }}" class="btn btn-outline-primary">Tambah Role</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -42,25 +37,24 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Nama Kategori</th>
+                                            <th>Nama Role</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($categories as $category)
+                                        @forelse ($roles as $role)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $category->name }}</td>
+                                                <td>{{ $role->name }}</td>
                                                 <td>
-                                                    <form action="{{ route('category.destroy', $category->id) }}"
-                                                        method="post">
+                                                    <a href="{{ route('role.edit', $role->id) }}"
+                                                        class="btn btn-outline-warning">Edit</a>
+                                                    <form action="{{ route('role.destroy', $role->id) }}" method="post"
+                                                        class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <a href="{{ route('category.edit', $category->id) }}"
-                                                            class="btn btn-outline-warning">Edit</a>
                                                         <button class="btn btn-outline-danger"
-                                                            onclick="return confirmDelete(event);"
-                                                            data-confirm-delete="true">Hapus</button>
+                                                            onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -78,27 +72,4 @@
             </div>
         </section>
     </div>
-@endsection
-@section('script-bottom')
-    <script>
-        function confirmDelete(event) {
-            event.preventDefault();
-            var form = event.target.parentElement;
-            var url = form.action;
-
-            Swal.fire({
-                title: 'Anda Yakin Delete Data Ini?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            });
-        }
-    </script>
 @endsection

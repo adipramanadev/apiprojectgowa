@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Alert;
 
 class CategoryController extends Controller
 {
@@ -12,8 +13,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
-        return view('admin.category.index');
+        //passing data 
+        $categories = Category::all();
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -30,7 +32,26 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate the request
+        $request->validate([
+            'name' => 'required|unique:categories'
+        ]);
+
+        //input request
+        $input = $request->all();
+
+        //create category
+        $save = Category::create($input);
+
+        //redirect to category index
+        if ($save) {
+            Alert::success('Category created successfully');
+            return redirect()->route('category.index');
+        } else {
+            return redirect()->route('category.index')->with('error', 'Category failed'. $request->name  .'to create');
+        
+        }
+
     }
 
     /**
@@ -46,7 +67,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        //find by id 
+        $category = Category::find($category->id);
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
@@ -54,14 +77,31 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        //validate 
+        $request->validate([
+            'name' => 'required|unique:categories'
+        ]);
+        $input = $request->all();
+        $category = Category::find($category->id);
+        //alert message
+        if ($category->update($input)) {
+            Alert::success('Category updated successfully');
+            return redirect()->route('category.index');
+        } else {
+            return redirect()->route('category.index')->with('error', 'Category failed'. $request->name  .'to update');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
         //
+        $category = Category::find($id);
+        $category->delete();
+        //alert message 
+        Alert::success('Category deleted successfully');
+        return redirect()->route('category.index');
     }
 }

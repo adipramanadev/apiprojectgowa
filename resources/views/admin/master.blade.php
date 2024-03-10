@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     @yield('title')
+    @yield('script')
 
     @include('admin.components.styles')
     <!-- /END GA -->
@@ -22,7 +23,8 @@
             @include('admin.layouts.footer')
         </div>
     </div>
-
+    @yield('script-bottom')
     @include('admin.components.scripts')
+    @include('sweetalert::alert')
 </body>
 </html>
