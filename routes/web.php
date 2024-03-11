@@ -4,16 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RoleController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,5 +28,9 @@ Route::prefix('admin')->group(function () {
     #role
     Route::get('role', [RoleController::class, 'index'])->name('role.index');
     Route::get('role/create', [RoleController::class, 'create'])->name('role.create');
+    Route::post('/role/store', [RoleController::class, 'store'])->name('role.store');
+    Route::delete('/role/{role}/destroy', [RoleController::class, 'destroy'])->name('role.destroy');
+    Route::get('/role/{role}/edit', [RoleController::class, 'edit'])->name('role.edit');
+    Route::put('/role/update/{role}', [RoleController::class, 'update'])->name('role.update');
 });
 

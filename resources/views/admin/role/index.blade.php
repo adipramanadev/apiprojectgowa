@@ -4,6 +4,12 @@
     <title>Role User</title>
 @endsection
 
+@section('script')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('stisla/js/page/modules-sweetalert.js') }}"></script>
+@endsection
+
 @section('content')
     <div class="main-content">
         <section class="section">
@@ -54,7 +60,8 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-outline-danger"
-                                                            onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
+                                                            onclick="return confirmDelete(event);"
+                                                            data-confirm-delete="true">Hapus</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -72,4 +79,28 @@
             </div>
         </section>
     </div>
+@endsection
+
+@section('script-bottom')
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault();
+            var form = event.target.parentElement;
+            var url = form.action;
+
+            Swal.fire({
+                title: 'Anda Yakin Delete Data Ini?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        }
+    </script>
 @endsection
