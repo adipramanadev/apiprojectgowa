@@ -73,7 +73,18 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //
+        //validate the request
+        $request->validate([
+            'name' => 'required|unique:roles'
+        ]);
+        $input = $request->all();
+        $role = Role::find($role->id);
+        $update = $role->update($input);
+        if ($update) {
+            return redirect()->route('role.index')->with('success', 'Role updated successfully');
+        } else {
+            return redirect()->back()->with('error', 'Role not updated');
+        }
     }
 
     /**

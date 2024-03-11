@@ -31,6 +31,6 @@ Route::prefix('admin')->group(function () {
     Route::post('/role/store', [RoleController::class, 'store'])->name('role.store');
     Route::delete('/role/{role}/destroy', [RoleController::class, 'destroy'])->name('role.destroy');
     Route::get('/role/{role}/edit', [RoleController::class, 'edit'])->name('role.edit');
-    Route::put('/role/{role}/update', [RoleController::class, 'update'])->name('role.update');
+    Route::put('/role/update/{role}', [RoleController::class, 'update'])->name('role.update');
 });
 
