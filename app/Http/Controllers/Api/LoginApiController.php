@@ -37,4 +37,15 @@ class LoginApiController extends Controller
             return response()->json(['message' => 'Login Failed'], 401);
         }
     }
+
+    //logout
+    public function logout(Request $request)
+    {
+        if ($request->user()) {
+            $request->user()->currentAccessToken()->delete();
+            return response()->json(['message' => 'Logged out']);
+        } else {
+            return response()->json(['message' => 'User not authenticated'], 401);
+        }
+    }
 }
