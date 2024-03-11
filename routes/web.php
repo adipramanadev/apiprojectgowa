@@ -37,6 +37,10 @@ Route::prefix('admin')->group(function () {
         #items 
         Route::get('items', [ItemController::class, 'index'])->name('items.index');
         Route::get('items/create', [ItemController::class, 'create'])->name('items.create');
+        Route::post('items/store', [ItemController::class, 'store'])->name('items.store');
+        Route::get('items/{item}/edit', [ItemController::class, 'edit'])->name('items.edit');
+        Route::put('items/{item}/update', [ItemController::class, 'update'])->name('items.update');
+        Route::delete('items/{item}/delete', [ItemController::class, 'destroy'])->name('items.destroy');
     });
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
