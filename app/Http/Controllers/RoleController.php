@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class RoleController extends Controller
 {
@@ -31,7 +32,20 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the request
+        $request->validate([
+            'name' => 'required|unique:roles'
+        ]);
+
+        // Create the role
+        $input = $request->all();
+        $save = Role::create($input);
+
+        if ($save) {
+            return redirect()->route('role.index')->with('success', 'Role created successfully');
+        } else {
+            return redirect()->back()->with('error', 'Role not created');
+        }
     }
 
     /**
@@ -47,7 +61,11 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        
+
+        //get the role by id
+        $role = Role::find($role->id);
+        return view('admin.role.edit', compact('role'));
     }
 
     /**
@@ -63,6 +81,9 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        //delete by id
+        $data = Role::find($role->id);
+        $data->delete();
+        return redirect()->back()->with('success', 'Role deleted successfully');
     }
 }
