@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ItemController;
 
 
 
@@ -31,7 +32,11 @@ Route::prefix('admin')->group(function () {
         Route::post('/role/store', [RoleController::class, 'store'])->name('role.store');
         Route::delete('/role/{role}/destroy', [RoleController::class, 'destroy'])->name('role.destroy');
         Route::get('/role/{role}/edit', [RoleController::class, 'edit'])->name('role.edit');
-        Route::put('/role/update/{role}', [RoleController::class, 'update'])->name('role.update');    
+        Route::put('/role/update/{role}', [RoleController::class, 'update'])->name('role.update');  
+        
+        #items 
+        Route::get('items', [ItemController::class, 'index'])->name('items.index');
+        Route::get('items/create', [ItemController::class, 'create'])->name('items.create');
     });
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

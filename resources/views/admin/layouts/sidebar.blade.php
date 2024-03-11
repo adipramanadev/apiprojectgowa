@@ -29,7 +29,7 @@
                     <span>Menu Master</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('category.index') }}">Data Kategori</a></li>
-                    <li><a class="nav-link" href="">Data Item</a></li>
+                    <li><a class="nav-link" href="{{ route('items.index') }}">Data Item</a></li>
                 </ul>
             </li>
             <li class="menu-header">Pages</li>
