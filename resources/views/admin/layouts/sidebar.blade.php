@@ -35,9 +35,9 @@
                     <li><a class="nav-link" href="{{ route('items.index') }}">Data Item</a></li>
                 </ul>
             </li>
-            <li class="menu-header">Pages</li>
-            <li class=active><a class="nav-link" href="blank.html"><i class="far fa-square"></i>
-                    <span>Blank Page</span></a></li>
+            <li class="menu-header">Transactions</li>
+            <li class=active><a class="nav-link" href="#"><i class="far fa-square"></i>
+                    <span>Transaksi Sampah</span></a></li>
         </ul>
 
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">

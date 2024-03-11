@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard.index');
+        //count data user yang terdaftar role admin
+        $user = User::where('role_id',  1)->count();
+        // $user = User::count();
+        return view('admin.dashboard.index', compact('user'));
     }
 }
