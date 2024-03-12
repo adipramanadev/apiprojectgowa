@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RoleController;
-
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\UserController;
 
 
 Route::get('/', function () {
@@ -17,6 +18,9 @@ Auth::routes();
 Route::prefix('admin')->group(function () {
     // add middleware to the route
     Route::middleware(['auth'])->group(function () {
+        #User
+        Route::get('user', [UserController::class, 'index'])->name('user.index');
+
         #category
         Route::get('category', [CategoryController::class, 'index'])->name('category.index');
         Route::get('category/create', [CategoryController::class, 'create'])->name('category.create');
@@ -31,7 +35,15 @@ Route::prefix('admin')->group(function () {
         Route::post('/role/store', [RoleController::class, 'store'])->name('role.store');
         Route::delete('/role/{role}/destroy', [RoleController::class, 'destroy'])->name('role.destroy');
         Route::get('/role/{role}/edit', [RoleController::class, 'edit'])->name('role.edit');
-        Route::put('/role/update/{role}', [RoleController::class, 'update'])->name('role.update');    
+        Route::put('/role/update/{role}', [RoleController::class, 'update'])->name('role.update');  
+        
+        #items 
+        Route::get('items', [ItemController::class, 'index'])->name('items.index');
+        Route::get('items/create', [ItemController::class, 'create'])->name('items.create');
+        Route::post('items/store', [ItemController::class, 'store'])->name('items.store');
+        Route::get('items/{item}/edit', [ItemController::class, 'edit'])->name('items.edit');
+        Route::put('items/{item}/update', [ItemController::class, 'update'])->name('items.update');
+        Route::delete('items/{item}/delete', [ItemController::class, 'destroy'])->name('items.destroy');
     });
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

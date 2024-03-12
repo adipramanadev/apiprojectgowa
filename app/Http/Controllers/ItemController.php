@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -13,6 +15,9 @@ class ItemController extends Controller
     public function index()
     {
         //
+        $items = Item::all();
+        $user = User::all();
+        return view('admin.items.index', compact('items', 'user'));
     }
 
     /**
@@ -21,6 +26,9 @@ class ItemController extends Controller
     public function create()
     {
         //
+        $users = User::all();
+        $categories = Category::all();
+        return view('admin.items.create', compact('users','categories'));
     }
 
     /**
@@ -28,7 +36,7 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
