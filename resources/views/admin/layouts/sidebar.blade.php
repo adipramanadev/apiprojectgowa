@@ -16,12 +16,14 @@
 
             </li>
             <li class="menu-header">Data Manajemen User</li>
-            <li class="dropdown" >
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
-                    <span>Data User</span></a>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                        class="fas fa-columns"></i>
+                    <span>Menu User</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link " href="#">Data User</a></li>
-                    <li><a class="nav-link {{ request()->is('role/*') ? 'active' : '' }}" href="{{ route('role.index') }}">Atur Role</a></li>
+                    <li><a class="nav-link " href="{{ route('user.index') }}">Data User</a></li>
+                    <li><a class="nav-link {{ request()->is('role/*') ? 'active' : '' }}"
+                            href="{{ route('role.index') }}">Atur Role</a></li>
                 </ul>
             </li>
 

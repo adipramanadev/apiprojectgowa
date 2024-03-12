@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ItemController;
-
+use App\Http\Controllers\UserController;
 
 
 Route::get('/', function () {
@@ -18,6 +18,9 @@ Auth::routes();
 Route::prefix('admin')->group(function () {
     // add middleware to the route
     Route::middleware(['auth'])->group(function () {
+        #User
+        Route::get('user', [UserController::class, 'index'])->name('user.index');
+
         #category
         Route::get('category', [CategoryController::class, 'index'])->name('category.index');
         Route::get('category/create', [CategoryController::class, 'create'])->name('category.create');
